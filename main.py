@@ -6,32 +6,8 @@ from client_python.client import Client
 import subprocess
 
 
-class pokemon:
-    def __init__(self, x, y, z, type, value, srcID, destID):
-        self.x = x
-        self.y = y
-        self.z = z
-        self.type = type
-        self.value = value
-        self.srcID = srcID
-        self.destID = destID
-
-
-class agent:
-    def __init__(self, id, value, src, dest, speed, x, y, z):
-        self.id = id
-        self.value = value
-        self.src = src
-        self.dest = dest
-        self.speed = speed
-        self.x = x
-        self.y = y
-        self.z = z
-
-
-
 # Auto server open
-subprocess.Popen(["powershell.exe", "java -jar Ex4_Server_v0.0.jar 15"])
+subprocess.Popen(["powershell.exe", "java -jar Ex4_Server_v0.0.jar 1"])
 
 # Host information
 PORT = 6666
@@ -60,22 +36,25 @@ for a in agents:
     print()
 
 
+#print(client.get_info())
 
- """
- Following function calculates the src and dest nodes of each pokemon
- """
-pokemons = json.loads(client.get_pokemons(), object_hook=lambda d: SimpleNamespace(**d)).Pokemons
-pokemons = [p.Pokemon for p in pokemons]
-for p in pokemons:
-    px, py, _ = eval(p.pos)
+    """
+    Following function calculates the src and dest nodes of each pokemon
+    """
+dictpoke = eval(client.get_pokemons()).get('Pokemons')
+# dictpoke[0]['srcID'] = 8
+# dictpoke[0]['destID'] = 9
+# print(dictpoke[0].get('Pokemon'))
+for curr in dictpoke:
+    p = curr.get('Pokemon')
+    px, py, _ = eval(p.get('pos'))
     for n in g.get_graph().get_all_v().values():
         srcx, srcy = n.pos[0], n.pos[1]
         for e in g.get_graph().all_out_edges_of_node(n.id):
             destx, desty = g.get_graph().get_all_v()[e].pos[0], g.get_graph().get_all_v()[e].pos[1]
             a = (srcy-desty)/(srcx-destx)
             b = srcy - a*srcx
-
-            if (py == a*px+b) and (desty<srcy and p.type<0 or desty>srcy and p.type>0):
+            if (py == a*px+b) and (desty<srcy and p.get('type')<0 or desty>srcy and p.get('type')>0):
                 print("Current pokemon is on current edge!")
                 print("srcID:", n.id, ", DestID:", g.get_graph().get_all_v()[e].id, "| For pokemon:")
                 print(p, "\n")
