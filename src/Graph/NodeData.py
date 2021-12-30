@@ -14,6 +14,3 @@ class NodeData:
         else:
             self.pos = eval(pos)
 
-
-    def __repr__(self):
-        return "Node ID:"+str(self.id)
