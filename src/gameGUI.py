@@ -51,8 +51,13 @@ class gameGUI:
                 desty = self.my_scale(destnode.pos[1], y=True)
                 if (srcy > desty):
                     pygame.draw.line(self.screen, (200, 100, 50), (srcx + 5, srcy + 5), (destx + 5, desty + 5))
+
+                    id_srf = self.FONT.render(str(self.g.get_graph().all_out_edges_of_node(n.id)[e]), True, Color(255, 255, 255))
+                    rect = id_srf.get_rect(center=((srcx+destx)/2, (srcy+desty)/2))
+                    self.screen.blit(id_srf, rect)
                 else:
                     pygame.draw.line(self.screen, (200, 100, 50), (srcx - 5, srcy - 5), (destx - 5, desty - 5))
+
 
     def drawAgents(self, agents: list):
         for a in agents:

@@ -10,7 +10,7 @@ from client_python.client import Client
 import subprocess
 
 # Auto server opener
-subprocess.Popen(["powershell.exe", "java -jar src/Ex4_Server_v0.0.jar 1"])
+subprocess.Popen(["powershell.exe", "java -jar src/Ex4_Server_v0.0.jar 0"])
 
 # Host information
 PORT = 6666
@@ -19,8 +19,6 @@ HOST = '127.0.0.1'
 # Initiate connection
 client = Client()
 client.start_connection(HOST, PORT)
-client.add_agent("{\"id\":0}")
-
 
 """
 get the map from the server and load it into GraphAlgo g
@@ -38,11 +36,12 @@ screen = display.set_mode((WIDTH, HEIGHT), depth=32, flags=RESIZABLE)
 clock = pygame.time.Clock()
 
 
-client.start()
 gameGUI = gameGUI(g, screen, client)
 gameAlgo = gameAlgo(g, client)
+gameAlgo.center_agents()
+client.start()
+i = 0
 while client.is_running() == 'true':
-
     # check events
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -52,7 +51,6 @@ while client.is_running() == 'true':
     """
     Following function calculates the src and dest nodes of each pokemon
     """
-
     dictpoke = eval(client.get_pokemons()).get('Pokemons')
     gameAlgo.loadPoke(dictpoke)
 
@@ -62,7 +60,7 @@ while client.is_running() == 'true':
     tempagents = eval(client.get_agents()).get('Agents')
     agents = gameAlgo.loadAgents(tempagents)
 
-    "move agents"
+    "alocate agents"
     gameAlgo.alocate(agents, dictpoke)
 
     "refresh the screen"
@@ -74,8 +72,13 @@ while client.is_running() == 'true':
     "draw pokes"
     gameGUI.drawPokes(dictpoke)
 
-    print(client.time_to_end(), ":", client.get_info())
+    print(agents, i)
     #clock.tick(30)
     display.update()
+    # client.move()
 
-    client.move()
+
+
+
+
+

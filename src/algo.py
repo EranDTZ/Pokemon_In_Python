@@ -9,6 +9,19 @@ class gameAlgo:
         self.g = g
         self.client = client
 
+    def center_agents(self):
+        agentnum = (int)(self.client.get_info().split(",")[8].split(":")[1].split("}")[0]) # microsoft call me for work 050-3331464
+        # 0 is pokemons, 1 is 'is logged in', 2 is moves, 3 is grade, 4 is game level, 5 is max user level, 6 is id, 7 is graph, 8 is num of agents
+        print(self.client.get_info())
+        print(agentnum)
+        tempgraph = GraphAlgo()
+        tempgraph.load_from_json("serverGraph.json")
+        for i in range(agentnum):
+            center = str(tempgraph.centerPoint()[0])
+            print(center)
+            self.client.add_agent("{\"id\":" + center + "}")
+            tempgraph.get_graph().remove_node(tempgraph.centerPoint()[0])
+
     def alocate(self, agents: list, dictpoke):
         "move agents"
         for a in agents:
@@ -20,7 +33,6 @@ class gameAlgo:
                     srcID = p.get('Pokemon').get('srcID')
                     destID = p.get('Pokemon').get('destID')
                     agentPOS = a.get('src')
-
 
                     currdist = self.g.shortest_path(agentPOS, srcID)[0]
                     if currdist < mindist:
@@ -36,7 +48,7 @@ class gameAlgo:
                     next_node = closeddestID
                     self.client.choose_next_edge(
                         '{"agent_id":' + str(a.get('id')) + ', "next_node_id":' + str(next_node) + '}')
-
+                self.client.move()
                 # next_node = (a.get('src')+1)%self.g.get_graph().v_size()
                 # self.client.choose_next_edge('{"agent_id":'+str(a.get('id'))+', "next_node_id":'+str(next_node)+'}')
 
