@@ -72,69 +72,74 @@ class gameGUI:
         for curr in dictpoke:
             p = curr.get('Pokemon')
             x, y, _ = eval(p.get('pos'))
+            pokV = (int)(p.get('value'))
             if p.get('type') < 0:
                 px, py = self.my_scale(x, x=True) - 15, self.my_scale(y, y=True) - 15
             else:
                 px, py = self.my_scale(x, x=True) + 15, self.my_scale(y, y=True) + 15
-            pokV = (int)(p.get('value'))
+
             if pokV == 5:
                 pok_image = pygame.image.load("pokemon_images\pok7.png")
                 pok_image = pygame.transform.scale(pok_image,(60,60))
-                self.screen.blit(pok_image,(px, py))
+
             if pokV == 6:
                 pok_image = pygame.image.load("pokemon_images\pok8.png")
                 pok_image = pygame.transform.scale(pok_image,(65,65))
-                self.screen.blit(pok_image,(px, py))
+
             if pokV == 7:
                 pok_image = pygame.image.load("pokemon_images\pok4.png")
                 pok_image = pygame.transform.scale(pok_image,(65,65))
-                self.screen.blit(pok_image,(px, py))
+
             if pokV == 8:
                 pok_image = pygame.image.load("pokemon_images\pok3.png")
                 pok_image = pygame.transform.scale(pok_image,(65,65))
-                self.screen.blit(pok_image,(px, py))
+
             if pokV == 9:
                 pok_image = pygame.image.load("pokemon_images\pok2.png")
                 pok_image = pygame.transform.scale(pok_image,(65,65))
-                self.screen.blit(pok_image,(px, py))
+
             if pokV == 10:
                 pok_image = pygame.image.load("pokemon_images\pok11.png")
                 pok_image = pygame.transform.scale(pok_image,(65,65))
-                self.screen.blit(pok_image,(px, py))
+
             if pokV == 11:
                 pok_image = pygame.image.load("pokemon_images\pok12.png")
                 pok_image = pygame.transform.scale(pok_image,(65,65))
-                self.screen.blit(pok_image,(px, py))
+
             if pokV == 12:
                 pok_image = pygame.image.load("pokemon_images\pok5.png")
                 pok_image = pygame.transform.scale(pok_image,(65,65))
-                self.screen.blit(pok_image,(px, py))
+
             if pokV == 13:
                 pok_image = pygame.image.load("pokemon_images\pok14.png")
                 pok_image = pygame.transform.scale(pok_image,(65,65))
-                self.screen.blit(pok_image,(px, py))
+
             if pokV == 14:
                 pok_image = pygame.image.load("pokemon_images\pok13.png")
                 pok_image = pygame.transform.scale(pok_image,(65,65))
-                self.screen.blit(pok_image,(px, py))
+
             if pokV == 15:
                 pok_image = pygame.image.load("pokemon_images\pok9.png")
                 pok_image = pygame.transform.scale(pok_image,(65,65))
-                self.screen.blit(pok_image,(px, py))
+
             if pokV == 16:
                 pok_image = pygame.image.load("pokemon_images\pok14.png")
                 pok_image = pygame.transform.scale(pok_image,(65,65))
-                self.screen.blit(pok_image,(px, py))
+
             if pokV > 15 or pokV < 5:
                 pok_image = pygame.image.load("pokemon_images\pok200.png")
                 pok_image = pygame.transform.scale(pok_image,(65,65))
-                self.screen.blit(pok_image,(px, py))
-
-
+            if p.get('type') < 0:
+                pok_image = pygame.transform.rotate(pok_image, 320)
+                self.screen.blit(pok_image, (px, py))
+            else:
+                pok_image = pygame.transform.rotate(pok_image, 40)
+                self.screen.blit(pok_image, (px, py))
             # pygame.draw.circle(self.screen, (0, 100, 150), (px, py), 15)
             # id_srf = self.FONT.render(str(p.get('srcID')) + " to " + str(p.get('destID')), True, Color(255, 255, 255))
             # rect = id_srf.get_rect(center=(px, py))
             # self.screen.blit(id_srf, rect)
+
 
     def drawBackground(self):
         background_image = pygame.image.load("pokemon_images\pok_back2.png")
