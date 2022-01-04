@@ -25,20 +25,30 @@ class gameAlgo:
             self.client.add_agent("{\"id\":" + center + "}")
             tempgraph.get_graph().remove_node(tempgraph.centerPoint()[0])
 
-    def alocate(self, agents: list, dictpoke):
+    def alocate(self, agents: list, listpoke: list):
         "move agents"
         for a in agents:
             if a.get('dest')==-1:
                 mindist = float('inf')
                 closeddestID = -1
                 closedtsrcID = -1
+                minpokePercent = float('inf')
                 minpokeID = -1
-                for p in dictpoke:
+                for p in listpoke:
                     srcID = p.get('Pokemon').get('srcID')
                     destID = p.get('Pokemon').get('destID')
                     agentPOS = a.get('src')
                     pokeID = p.get('Pokemon').get('ID')
+                    pokeV = p.get('Pokemon').get('value')
                     currdist = self.g.shortest_path(agentPOS, srcID)[0]
+                    Percent = currdist - pokeV
+
+                    # if Percent < minpokePercent or currdist < mindist:
+                    #     mindist = currdist
+                    #     closedtsrcID = srcID
+                    #     closeddestID = destID
+                    #     minpokePercent = Percent
+                    #     minpokeID = pokeID
 
                     if currdist < mindist:
                         mindist = currdist
@@ -58,6 +68,7 @@ class gameAlgo:
 
     def loadPoke(self, dictpoke: dict):
         epsilon = 0.00000001
+        listpoke = []
         for curr in dictpoke:
             p = curr.get('Pokemon')
             px, py, _ = eval(p.get('pos'))
@@ -79,8 +90,11 @@ class gameAlgo:
                             minsrcID = n.id
                             mindestID = self.g.get_graph().get_all_v()[e].id
 
+
             p['srcID'] = minsrcID
             p['destID'] = mindestID
+            listpoke.append(p)
+        sorted(listpoke, key=lambda p: p['value'])
 
 
 
@@ -89,7 +103,9 @@ class gameAlgo:
         for curr in tempagents:
             a = curr.get('Agent')
             agents.append(a)
+        # sorted(agents, key=lambda a: a['speed'])
         return agents
+
 
     def move(self, agents, dictpoke, client):
         s = False

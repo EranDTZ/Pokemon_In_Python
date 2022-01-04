@@ -47,6 +47,7 @@ gameGUI.updateclient(client)
 print(client.time_to_end())
 target = (int)(client.time_to_end())/100
 i = 0
+
 while client.is_running() == 'true':
     # check events
     if (int)(client.time_to_end()) == 0:
@@ -68,6 +69,7 @@ while client.is_running() == 'true':
     """
     dictpoke = eval(client.get_pokemons()).get('Pokemons')
     gameAlgo.loadPoke(dictpoke)
+
 
     """
     Loading agents into a list called agents
