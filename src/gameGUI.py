@@ -146,3 +146,23 @@ class gameGUI:
         #                       self.screen.get_width() - (self.my_scale(self.min_x, x=True) - 50),
         #                       self.screen.get_height() - (self.my_scale(self.min_y, y=True) - 50))
         # pygame.draw.rect(self.screen, (0, 200, 100), borders, 2)
+
+        inforect = pygame.Rect(0, 0, 150, 500)
+        pygame.draw.rect(self.screen, (211, 211, 211), inforect)
+
+        myfont = pygame.font.SysFont('Courier New', 15)
+        ttetext = myfont.render("time to end " + str(self.client.time_to_end()), False, (0, 0, 0))
+        self.screen.blit(ttetext, (0, 0))
+        movetext = myfont.render(
+            "moves " + str((int)(self.client.get_info().split(",")[2].split(":")[1].split("}")[0])), False, (0, 0, 0))
+        self.screen.blit(movetext, (0, 20))
+        gradetext = myfont.render(
+            "grade " + str((int)(self.client.get_info().split(",")[3].split(":")[1].split("}")[0])), False, (0, 0, 0))
+        self.screen.blit(gradetext, (0, 40))
+        stoptext = myfont.render("exit game button", False, (0, 0, 0))
+        exitbutton = pygame.Rect(0, 60, 150, 20)
+        pygame.draw.rect(self.screen, (0, 100, 100), exitbutton)
+        self.screen.blit(stoptext, (0, 60))
+
+    def updateclient(self, client):
+        self.client = client
