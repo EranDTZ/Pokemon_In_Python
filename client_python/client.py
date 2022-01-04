@@ -199,3 +199,4 @@ class Client:
         res = self.__send_message('.')
         if res == 'good bye':
             self.soc.close()
+
