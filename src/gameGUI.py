@@ -110,11 +110,11 @@ class gameGUI:
                 pok_image = pygame.transform.scale(pok_image,(65,65))
                 self.screen.blit(pok_image,(px, py))
             if pokV == 13:
-                pok_image = pygame.image.load("pokemon_images\pok1.png")
+                pok_image = pygame.image.load("pokemon_images\pok14.png")
                 pok_image = pygame.transform.scale(pok_image,(65,65))
                 self.screen.blit(pok_image,(px, py))
             if pokV == 14:
-                pok_image = pygame.image.load("pokemon_images\pok6.png")
+                pok_image = pygame.image.load("pokemon_images\pok13.png")
                 pok_image = pygame.transform.scale(pok_image,(65,65))
                 self.screen.blit(pok_image,(px, py))
             if pokV == 15:
@@ -138,7 +138,7 @@ class gameGUI:
 
     def drawBackground(self):
         background_image = pygame.image.load("pokemon_images\pok_back2.png")
-        background_image_top = self.screen.get_height() - background_image.get_height()
+        background_image_top = (self.screen.get_height() - background_image.get_height())
         background_image_left = self.screen.get_width() / 2 - background_image.get_width() / 2
 
         self.screen.blit(background_image, (background_image_left, background_image_top))

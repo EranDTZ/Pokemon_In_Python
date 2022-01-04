@@ -12,7 +12,7 @@ from client_python.client import Client
 import subprocess
 
 # Auto server opener
-subprocess.Popen(["powershell.exe", "java -jar Ex4_Server_v0.0.jar 14"])
+subprocess.Popen(["powershell.exe", "java -jar Ex4_Server_v0.0.jar 13"])
 
 # Host information
 PORT = 6666
@@ -32,7 +32,7 @@ g = GraphAlgo()
 
 g.load_from_json("serverGraph.json")
 
-WIDTH, HEIGHT = 1080, 720
+WIDTH, HEIGHT = 1020, 720
 pygame.init()
 screen = display.set_mode((WIDTH, HEIGHT), depth=32, flags=RESIZABLE)
 clock = pygame.time.Clock()
@@ -90,7 +90,7 @@ while client.is_running() == 'true':
     display.update()
 
     gameAlgo.move(agents, dictpoke, client)
-
+    client.move()
     #print(client.time_to_end(), client.get_info())
         # 0.000005984958324579959 is the progress for 1 tick of TTE on a 1.6449953 edge
         # 0.000003989972216386639
