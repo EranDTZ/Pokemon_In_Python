@@ -12,7 +12,7 @@ from client_python.client import Client
 import subprocess
 
 # Auto server opener
-subprocess.Popen(["powershell.exe", "java -jar Ex4_Server_v0.0.jar 1"])
+# subprocess.Popen(["powershell.exe", "java -jar Ex4_Server_v0.0.jar 11"])
 
 # Host information
 PORT = 6666
@@ -72,7 +72,6 @@ while client.is_running() == 'true':
     """
     dictpoke = eval(client.get_pokemons()).get('Pokemons')
     gameAlgo.loadPoke(dictpoke)
-
 
     """
     Loading agents into a list called agents

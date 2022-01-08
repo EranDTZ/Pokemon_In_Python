@@ -13,6 +13,8 @@ class gameAlgo:
         self.i = 0
 
     def center_agents(self):
+        """This method calculates the optimized node to spawn the agent at, also, it reads from the server how many
+        agents should be spawned"""
         agentnum = (int)(self.client.get_info().split(",")[8].split(":")[1].split("}")[0]) # microsoft call me for work 050-3331464
 # 0 is pokemons, 1 is 'is logged in', 2 is moves, 3 is grade, 4 is game level, 5 is max user level, 6 is id, 7 is graph, 8 is num of agents
         tempgraph = GraphAlgo()
@@ -28,7 +30,9 @@ class gameAlgo:
             tempgraph.get_graph().remove_node(tempgraph.centerPoint()[0])
 
     def alocate(self, agents: list, listpoke: list):
-        "move agents"
+        """This method get the updated list of pokemons and agents,
+        and calcualte for each agent which pokemon it should head to.
+        It also sends the command to server itself. """
         for a in agents:
             if a.get('dest')==-1:
                 mindist = float('inf')
@@ -54,6 +58,10 @@ class gameAlgo:
 
 
     def loadPoke(self, dictpoke: dict):
+        """
+        This function loads the dictionary of the pokemons from the server, and update it with new information about each pokemon.
+        We find the correct edge for each pokemon using simple calculations.
+        """
         epsilon = 0.00000001
         listpoke = []
         for curr in dictpoke:
@@ -90,6 +98,10 @@ class gameAlgo:
         return agents
 
     def move(self, agents, dictpoke, client):
+        """"
+        This method refreshes the server.
+        When an agent is headed to a pokemon on the same edge, we used more advanced calcualtions for predicting it's location.
+        """
         ss = False
         pokeflag = False
         for a in agents:
