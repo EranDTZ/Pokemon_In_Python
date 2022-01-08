@@ -133,7 +133,7 @@ class gameGUI:
                 pok_image = pygame.transform.rotate(pok_image, 320)
                 self.screen.blit(pok_image, (px, py))
             else:
-                pok_image = pygame.transform.rotate(pok_image, 40)
+                pok_image = pygame.transform.rotate(pok_image, 0)
                 self.screen.blit(pok_image, (px, py))
             # pygame.draw.circle(self.screen, (0, 100, 150), (px, py), 15)
             # id_srf = self.FONT.render(str(p.get('srcID')) + " to " + str(p.get('destID')), True, Color(255, 255, 255))
@@ -152,22 +152,22 @@ class gameGUI:
         #                       self.screen.get_height() - (self.my_scale(self.min_y, y=True) - 50))
         # pygame.draw.rect(self.screen, (0, 200, 100), borders, 2)
 
-        inforect = pygame.Rect(0, 0, 150, 500)
-        pygame.draw.rect(self.screen, (211, 211, 211), inforect)
+        # inforect = pygame.Rect(0, 0, 150, 500)
+        # pygame.draw.rect(self.screen, (211, 211, 211), inforect)
 
-        myfont = pygame.font.SysFont('Courier New', 15)
+        myfont = pygame.font.SysFont('Courier New', 17)
         ttetext = myfont.render("time to end " + str(self.client.time_to_end()), False, (0, 0, 0))
-        self.screen.blit(ttetext, (0, 0))
+        self.screen.blit(ttetext, (5, 70))
         movetext = myfont.render(
             "moves " + str((int)(self.client.get_info().split(",")[2].split(":")[1].split("}")[0])), False, (0, 0, 0))
-        self.screen.blit(movetext, (0, 20))
+        self.screen.blit(movetext, (5, 30))
         gradetext = myfont.render(
             "grade " + str((int)(self.client.get_info().split(",")[3].split(":")[1].split("}")[0])), False, (0, 0, 0))
-        self.screen.blit(gradetext, (0, 40))
+        self.screen.blit(gradetext, (5, 50))
         stoptext = myfont.render("exit game button", False, (0, 0, 0))
-        exitbutton = pygame.Rect(0, 60, 150, 20)
+        exitbutton = pygame.Rect(3, 5, 170, 20)
         pygame.draw.rect(self.screen, (0, 100, 100), exitbutton)
-        self.screen.blit(stoptext, (0, 60))
+        self.screen.blit(stoptext, (5, 5))
 
     def updateclient(self, client):
         self.client = client
