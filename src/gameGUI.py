@@ -9,8 +9,6 @@ from pygame.locals import *
 
 
 class gameGUI:
-
-
     def __init__(self, g: GraphAlgo, screen: pygame.display, client: Client):
         self.screen = screen
         self.g = g
@@ -27,8 +25,6 @@ class gameGUI:
         relative to min and max screen dimentions
         """
         return ((data - min_data) / (max_data - min_data)) * (max_screen - min_screen) + min_screen
-
-    # decorate scale with the correct values
 
     def my_scale(self, data, x=False, y=False):
         if x:
@@ -52,10 +48,6 @@ class gameGUI:
                 desty = self.my_scale(destnode.pos[1], y=True)
                 if (srcy > desty):
                     pygame.draw.line(self.screen, (136, 138, 133), (srcx + 5, srcy + 5), (destx + 5, desty + 5))
-
-                    # id_srf = self.FONT.render(str(self.g.get_graph().all_out_edges_of_node(n.id)[e]), True, Color(255, 255, 255))
-                    # rect = id_srf.get_rect(center=((srcx+destx)/2, (srcy+desty)/2))
-                    # self.screen.blit(id_srf, rect)
                 else:
                     pygame.draw.line(self.screen, (136, 138, 133), (srcx - 5, srcy - 5), (destx - 5, desty - 5))
 
@@ -66,7 +58,6 @@ class gameGUI:
             agent_image = pygame.image.load("pokemon_images/agent_pokaball.png")
             agrnt_image = pygame.transform.scale(agent_image, (30, 30))
             self.screen.blit(agrnt_image, (self.my_scale(x, x=True), self.my_scale(y, y=True)))
-            # pygame.draw.circle(self.screen, (0, 100, 0), (self.my_scale(x, x=True), self.my_scale(y, y=True)), 15)
 
     def drawPokes(self, dictpoke: dict):
         for curr in dictpoke:
@@ -82,63 +73,59 @@ class gameGUI:
                 pok_image = pygame.image.load("pokemon_images\pok7.png")
                 pok_image = pygame.transform.scale(pok_image,(60,60))
 
-            if pokV == 6:
+            elif pokV == 6:
                 pok_image = pygame.image.load("pokemon_images\pok8.png")
                 pok_image = pygame.transform.scale(pok_image,(65,65))
 
-            if pokV == 7:
+            elif pokV == 7:
                 pok_image = pygame.image.load("pokemon_images\pok4.png")
                 pok_image = pygame.transform.scale(pok_image,(65,65))
 
-            if pokV == 8:
+            elif pokV == 8:
                 pok_image = pygame.image.load("pokemon_images\pok3.png")
                 pok_image = pygame.transform.scale(pok_image,(65,65))
 
-            if pokV == 9:
+            elif pokV == 9:
                 pok_image = pygame.image.load("pokemon_images\pok2.png")
                 pok_image = pygame.transform.scale(pok_image,(65,65))
 
-            if pokV == 10:
+            elif pokV == 10:
                 pok_image = pygame.image.load("pokemon_images\pok11.png")
                 pok_image = pygame.transform.scale(pok_image,(65,65))
 
-            if pokV == 11:
+            elif pokV == 11:
                 pok_image = pygame.image.load("pokemon_images\pok12.png")
                 pok_image = pygame.transform.scale(pok_image,(65,65))
 
-            if pokV == 12:
+            elif pokV == 12:
                 pok_image = pygame.image.load("pokemon_images\pok5.png")
                 pok_image = pygame.transform.scale(pok_image,(65,65))
 
-            if pokV == 13:
+            elif pokV == 13:
                 pok_image = pygame.image.load("pokemon_images\pok14.png")
                 pok_image = pygame.transform.scale(pok_image,(65,65))
 
-            if pokV == 14:
+            elif pokV == 14:
                 pok_image = pygame.image.load("pokemon_images\pok13.png")
                 pok_image = pygame.transform.scale(pok_image,(65,65))
 
-            if pokV == 15:
+            elif pokV == 15:
                 pok_image = pygame.image.load("pokemon_images\pok9.png")
                 pok_image = pygame.transform.scale(pok_image,(65,65))
 
-            if pokV == 16:
+            elif pokV == 16:
                 pok_image = pygame.image.load("pokemon_images\pok14.png")
                 pok_image = pygame.transform.scale(pok_image,(65,65))
 
-            if pokV > 15 or pokV < 5:
+            else:
                 pok_image = pygame.image.load("pokemon_images\pok200.png")
                 pok_image = pygame.transform.scale(pok_image,(65,65))
             if p.get('type') < 0:
                 pok_image = pygame.transform.rotate(pok_image, 320)
                 self.screen.blit(pok_image, (px, py))
             else:
-                pok_image = pygame.transform.rotate(pok_image, 40)
+                pok_image = pygame.transform.rotate(pok_image, 0)
                 self.screen.blit(pok_image, (px, py))
-            # pygame.draw.circle(self.screen, (0, 100, 150), (px, py), 15)
-            # id_srf = self.FONT.render(str(p.get('srcID')) + " to " + str(p.get('destID')), True, Color(255, 255, 255))
-            # rect = id_srf.get_rect(center=(px, py))
-            # self.screen.blit(id_srf, rect)
 
 
     def drawBackground(self):
@@ -147,27 +134,24 @@ class gameGUI:
         background_image_left = self.screen.get_width() / 2 - background_image.get_width() / 2
 
         self.screen.blit(background_image, (background_image_left, background_image_top))
-        # borders = pygame.Rect(self.my_scale(self.min_x, x=True) - 50, self.my_scale(self.min_y, y=True) - 50,
-        #                       self.screen.get_width() - (self.my_scale(self.min_x, x=True) - 50),
-        #                       self.screen.get_height() - (self.my_scale(self.min_y, y=True) - 50))
-        # pygame.draw.rect(self.screen, (0, 200, 100), borders, 2)
+        borders = pygame.Rect(self.my_scale(self.min_x, x=True) - 50, self.my_scale(self.min_y, y=True) - 50,
+                               self.screen.get_width() - (self.my_scale(self.min_x, x=True) - 50),
+                              self.screen.get_height() - (self.my_scale(self.min_y, y=True) - 50))
+        pygame.draw.rect(self.screen, (0, 0, 0), borders, 2)
 
-        inforect = pygame.Rect(0, 0, 150, 500)
-        pygame.draw.rect(self.screen, (211, 211, 211), inforect)
-
-        myfont = pygame.font.SysFont('Courier New', 15)
+        myfont = pygame.font.SysFont('Courier New', 17)
         ttetext = myfont.render("time to end " + str(self.client.time_to_end()), False, (0, 0, 0))
-        self.screen.blit(ttetext, (0, 0))
+        self.screen.blit(ttetext, (5, 70))
         movetext = myfont.render(
             "moves " + str((int)(self.client.get_info().split(",")[2].split(":")[1].split("}")[0])), False, (0, 0, 0))
-        self.screen.blit(movetext, (0, 20))
+        self.screen.blit(movetext, (5, 30))
         gradetext = myfont.render(
             "grade " + str((int)(self.client.get_info().split(",")[3].split(":")[1].split("}")[0])), False, (0, 0, 0))
-        self.screen.blit(gradetext, (0, 40))
+        self.screen.blit(gradetext, (5, 50))
         stoptext = myfont.render("exit game button", False, (0, 0, 0))
-        exitbutton = pygame.Rect(0, 60, 150, 20)
+        exitbutton = pygame.Rect(3, 5, 170, 20)
         pygame.draw.rect(self.screen, (0, 100, 100), exitbutton)
-        self.screen.blit(stoptext, (0, 60))
+        self.screen.blit(stoptext, (5, 5))
 
     def updateclient(self, client):
         self.client = client
