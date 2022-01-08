@@ -13,7 +13,7 @@ This is the back engine for the GUI of the game, it reads from the main file the
 
 </br>
 </br>
-###### Read more about the project in the wiki tab
+##### Read more about the project in the wiki tab
 https://github.com/EranDTZ/Pokemon_In_Python/wiki
 
 ## How to use - READ THIS <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
